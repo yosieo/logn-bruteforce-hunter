@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+reports/
+# Never commit real exports from a client or employer environment
+data/
+*.real.csv
