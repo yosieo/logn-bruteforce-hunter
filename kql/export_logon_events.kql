@@ -1,0 +1,21 @@
+// Export remote logon events for hunt.py
+// Run in Microsoft Defender Advanced Hunting or Microsoft Sentinel (Logs),
+// then export the results to CSV.
+//
+// Adjust the time range and device filter to your own environment.
+DeviceLogonEvents
+| where Timestamp > ago(7d)
+| where ActionType in ("LogonSuccess", "LogonFailed")
+| where isnotempty(RemoteIP)
+| where RemoteIPType == "Public"          // focus on internet-facing exposure
+// | where DeviceName startswith "<your-vm-prefix>"
+| project Timestamp, DeviceName, ActionType, AccountName, LogonType, RemoteIP
+| order by Timestamp asc
+
+
+// Quick in-console version of the brute-force rule (same logic as hunt.py):
+// DeviceLogonEvents
+// | where Timestamp > ago(7d) and ActionType == "LogonFailed" and isnotempty(RemoteIP)
+// | summarize Failures = count(), Accounts = dcount(AccountName) by RemoteIP, DeviceName, bin(Timestamp, 5m)
+// | where Failures >= 10
+// | order by Failures desc
