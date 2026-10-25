@@ -1,0 +1,4 @@
+severity,detection,mitre,remote_ip,failed_count,accounts,devices,first_seen,last_seen,detail
+High,Possible compromise: success after brute force,T1110 -> T1078 Valid Accounts,203.0.113.45,34,labuser,win-vm-honeypot-01,2026-08-14 02:00:08 UTC,2026-08-14 02:04:16 UTC,"34 failed logons, then a successful logon as 'labuser' on win-vm-honeypot-01 at 2026-08-14 02:04:16 UTC."
+Medium,Password spraying,T1110.003 Password Spraying,198.51.100.23,18,admin;administrator;backup;guest;scanner;sql;support;test;user,win-vm-honeypot-02,2026-08-14 02:32:13 UTC,2026-08-14 03:03:40 UTC,Failed logons against 9 different accounts.
+Medium,Brute force,T1110.001 Password Guessing,192.0.2.77,18,root,linux-vm-honeypot-01,2026-08-14 03:06:50 UTC,2026-08-14 03:09:10 UTC,Peak of 18 failed logons within 5 min.
